@@ -1,0 +1,18 @@
+/*
+ * Below antd's lg breakpoint Refine hides the side menu behind a button it pins
+ * at top: 64px, on top of the page. Move that button up into the header bar and
+ * leave room for it there instead.
+ */
+@media (max-width: 991.98px) {
+  .ant-layout-has-sider > .ant-btn-icon-only[style*='position: fixed'] {
+    top: 12px !important;
+    left: 12px;
+    border-radius: 6px !important;
+  }
+  .gs-header {
+    padding-inline: 64px 16px !important;
+  }
+  .ant-layout-content {
+    padding: 16px !important;
+  }
+}

@@ -1,0 +1,123 @@
+import { ErrorComponent, RefineThemes, ThemedLayout, ThemedTitle, useNotificationProvider } from '@refinedev/antd';
+import { Authenticated, Refine } from '@refinedev/core';
+import routerProvider, { CatchAllNavigate, DocumentTitleHandler, NavigateToResource } from '@refinedev/react-router';
+import { App as AntdApp, ConfigProvider } from 'antd';
+import { BrowserRouter, Outlet, Route, Routes } from 'react-router';
+
+import '@refinedev/antd/dist/reset.css';
+import './styles.css';
+
+import { Header } from './components/Header';
+import { BookingList } from './pages/bookings/BookingList';
+import { BookingShow } from './pages/bookings/BookingShow';
+import { DashboardPage } from './pages/dashboard/DashboardPage';
+import { DisputeList } from './pages/disputes/DisputeList';
+import { DisputeShow } from './pages/disputes/DisputeShow';
+import { LoginPage } from './pages/login/LoginPage';
+import { SendPage } from './pages/notifications/SendPage';
+import { SentList } from './pages/notifications/SentList';
+import { TemplateList } from './pages/notifications/TemplateList';
+import { ReconciliationPage } from './pages/payments/ReconciliationPage';
+import { TransactionList } from './pages/payments/TransactionList';
+import { TransactionShow } from './pages/payments/TransactionShow';
+import { WalletShow } from './pages/payments/WalletShow';
+import { WithdrawalList } from './pages/payments/WithdrawalList';
+import { WithdrawalShow } from './pages/payments/WithdrawalShow';
+import { ReportList } from './pages/reviews/ReportList';
+import { ReviewList } from './pages/reviews/ReviewList';
+import { ReviewShow } from './pages/reviews/ReviewShow';
+import { AuditLog } from './pages/staff/AuditLog';
+import { StaffList } from './pages/staff/StaffList';
+import { PlanList } from './pages/subscriptions/PlanList';
+import { SubscriptionList } from './pages/subscriptions/SubscriptionList';
+import { SubscriptionShow } from './pages/subscriptions/SubscriptionShow';
+import { UserList } from './pages/users/UserList';
+import { UserShow } from './pages/users/UserShow';
+import { accessControlProvider, authProvider, dataProvider } from './providers';
+import { resources } from './resources';
+
+const Title = ({ collapsed }: { collapsed: boolean }) => <ThemedTitle collapsed={collapsed} text="Gigspot Admin" />;
+
+export function App() {
+  return (
+    <BrowserRouter>
+      <ConfigProvider theme={RefineThemes.Blue}>
+        <AntdApp>
+          <Refine
+            dataProvider={dataProvider}
+            authProvider={authProvider}
+            accessControlProvider={accessControlProvider}
+            routerProvider={routerProvider}
+            notificationProvider={useNotificationProvider}
+            resources={resources}
+            options={{ syncWithLocation: false, warnWhenUnsavedChanges: false, disableTelemetry: true, title: { text: 'Gigspot Admin' } }}
+          >
+            <Routes>
+              <Route
+                element={
+                  <Authenticated key="admin" fallback={<CatchAllNavigate to="/login" />}>
+                    <ThemedLayout Title={Title} Header={Header}>
+                      <Outlet />
+                    </ThemedLayout>
+                  </Authenticated>
+                }
+              >
+                <Route index element={<DashboardPage />} />
+                <Route path="/users">
+                  <Route index element={<UserList />} />
+                  <Route path="show/:id" element={<UserShow />} />
+                </Route>
+                <Route path="/bookings">
+                  <Route index element={<BookingList />} />
+                  <Route path="show/:id" element={<BookingShow />} />
+                </Route>
+                <Route path="/disputes">
+                  <Route index element={<DisputeList />} />
+                  <Route path="show/:id" element={<DisputeShow />} />
+                </Route>
+                <Route path="/transactions">
+                  <Route index element={<TransactionList />} />
+                  <Route path="show/:id" element={<TransactionShow />} />
+                </Route>
+                <Route path="/withdrawals">
+                  <Route index element={<WithdrawalList />} />
+                  <Route path="show/:id" element={<WithdrawalShow />} />
+                </Route>
+                <Route path="/wallets/show/:id" element={<WalletShow />} />
+                <Route path="/reconciliation" element={<ReconciliationPage />} />
+                <Route path="/subscriptions">
+                  <Route index element={<SubscriptionList />} />
+                  <Route path="show/:id" element={<SubscriptionShow />} />
+                </Route>
+                <Route path="/plans" element={<PlanList />} />
+                <Route path="/reviews">
+                  <Route index element={<ReviewList />} />
+                  <Route path="show/:id" element={<ReviewShow />} />
+                </Route>
+                <Route path="/review-reports" element={<ReportList />} />
+                <Route path="/notifications/send" element={<SendPage />} />
+                <Route path="/notifications/sent" element={<SentList />} />
+                <Route path="/notifications/templates" element={<TemplateList />} />
+                <Route path="/staff" element={<StaffList />} />
+                <Route path="/audit-log" element={<AuditLog />} />
+                <Route path="*" element={<ErrorComponent />} />
+              </Route>
+              <Route
+                element={
+                  <Authenticated key="login" fallback={<Outlet />}>
+                    <NavigateToResource resource="dashboard" />
+                  </Authenticated>
+                }
+              >
+                <Route path="/login" element={<LoginPage />} />
+              </Route>
+            </Routes>
+            <DocumentTitleHandler
+              handler={({ resource }) => (resource?.meta?.label ? `${resource.meta.label} · Gigspot Admin` : 'Gigspot Admin')}
+            />
+          </Refine>
+        </AntdApp>
+      </ConfigProvider>
+    </BrowserRouter>
+  );
+}
