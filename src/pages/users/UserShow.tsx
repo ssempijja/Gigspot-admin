@@ -67,8 +67,18 @@ export function UserShow() {
         </Space>
         <Space wrap>
           {user.professional_profile && (
-            <PermittedLink to={`/wallets/show/${user.id}`} permission="payments.view">
-              Wallet
+            <>
+              <PermittedLink to={`/professionals/show/${user.professional_profile.id}`} permission="professionals.view">
+                Professional profile
+              </PermittedLink>
+              <PermittedLink to={`/wallets/show/${user.id}`} permission="payments.view">
+                Wallet
+              </PermittedLink>
+            </>
+          )}
+          {['client', 'company'].includes(user.role) && (
+            <PermittedLink to={`/postings?client=${user.id}`} permission="postings.view">
+              Postings
             </PermittedLink>
           )}
           <PermittedLink to={`/transactions?user=${user.id}`} permission="payments.view">

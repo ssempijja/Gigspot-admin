@@ -5,6 +5,7 @@ import {
   DashboardOutlined,
   MessageOutlined,
   SafetyOutlined,
+  ShopOutlined,
   StarOutlined,
   TeamOutlined,
   WalletOutlined,
@@ -22,6 +23,11 @@ export const resources: ResourceProps[] = [
   { name: 'users', list: '/users', show: '/users/show/:id', meta: { label: 'Users', icon: <TeamOutlined /> } },
   { name: 'bookings', list: '/bookings', show: '/bookings/show/:id', meta: { label: 'Bookings', icon: <CalendarOutlined /> } },
   { name: 'disputes', list: '/disputes', show: '/disputes/show/:id', meta: { label: 'Disputes', icon: <WarningOutlined /> } },
+
+  { name: 'marketplace', meta: { label: 'Marketplace', icon: <ShopOutlined /> } },
+  { name: 'professionals', list: '/professionals', show: '/professionals/show/:id', meta: { label: 'Professionals', parent: 'marketplace' } },
+  { name: 'postings', list: '/postings', show: '/postings/show/:id', meta: { label: 'Gigs and jobs', parent: 'marketplace' } },
+  { name: 'categories', list: '/categories', meta: { label: 'Categories', parent: 'marketplace' } },
 
   { name: 'money', meta: { label: 'Money', icon: <WalletOutlined /> } },
   { name: 'transactions', list: '/transactions', show: '/transactions/show/:id', meta: { label: 'Transactions', parent: 'money' } },

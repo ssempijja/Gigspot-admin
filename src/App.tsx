@@ -13,6 +13,7 @@ import { BookingShow } from './pages/bookings/BookingShow';
 import { DashboardPage } from './pages/dashboard/DashboardPage';
 import { DisputeList } from './pages/disputes/DisputeList';
 import { DisputeShow } from './pages/disputes/DisputeShow';
+import { CategoryList } from './pages/categories/CategoryList';
 import { LoginPage } from './pages/login/LoginPage';
 import { SendPage } from './pages/notifications/SendPage';
 import { SentList } from './pages/notifications/SentList';
@@ -23,6 +24,10 @@ import { TransactionShow } from './pages/payments/TransactionShow';
 import { WalletShow } from './pages/payments/WalletShow';
 import { WithdrawalList } from './pages/payments/WithdrawalList';
 import { WithdrawalShow } from './pages/payments/WithdrawalShow';
+import { PostingList } from './pages/postings/PostingList';
+import { PostingShow } from './pages/postings/PostingShow';
+import { ProfessionalList } from './pages/professionals/ProfessionalList';
+import { ProfessionalShow } from './pages/professionals/ProfessionalShow';
 import { ReportList } from './pages/reviews/ReportList';
 import { ReviewList } from './pages/reviews/ReviewList';
 import { ReviewShow } from './pages/reviews/ReviewShow';
@@ -75,6 +80,15 @@ export function App() {
                   <Route index element={<DisputeList />} />
                   <Route path="show/:id" element={<DisputeShow />} />
                 </Route>
+                <Route path="/professionals">
+                  <Route index element={<ProfessionalList />} />
+                  <Route path="show/:id" element={<ProfessionalShow />} />
+                </Route>
+                <Route path="/postings">
+                  <Route index element={<PostingList />} />
+                  <Route path="show/:id" element={<PostingShow />} />
+                </Route>
+                <Route path="/categories" element={<CategoryList />} />
                 <Route path="/transactions">
                   <Route index element={<TransactionList />} />
                   <Route path="show/:id" element={<TransactionShow />} />

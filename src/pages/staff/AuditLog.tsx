@@ -32,6 +32,8 @@ const PAGES: Record<string, string> = {
   WithdrawalRequest: '/withdrawals/show/',
   Subscription: '/subscriptions/show/',
   Review: '/reviews/show/',
+  ProfessionalProfile: '/professionals/show/',
+  JobRequest: '/postings/show/',
 };
 
 function entity(e: Entry) {

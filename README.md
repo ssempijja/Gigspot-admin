@@ -14,6 +14,9 @@ Built with React 19, [Refine](https://refine.dev) 5 and Ant Design 5, on Vite.
 | Users | `users.view` | Search and filter; edit details, suspend or reactivate, change role, approve or reject identity checks, review documents |
 | Bookings | `bookings.view` | Search and filter; cancel (optionally reopening the gig), mark done, hold, lift or release a payout; payments, proof of work, review, and messages (opening messages is audited) |
 | Disputes | `disputes.view` | Start review, resolve (refund the client, pay the professional, split, or no money moves), close without outcome |
+| Professionals | `professionals.view` | Filter by category, city, listing and verification; list, feature or mark unavailable; hide or show a service; approve or reject certificates; remove portfolio items; recompute rating and earnings |
+| Gigs and jobs | `postings.view` | Filter by kind, status and category; see quotes; edit a posting's wording (e.g. remove phone numbers); close an open posting, declining its pending quotes |
+| Categories | `professionals.view` | Add, edit, hide categories (`categories.manage`); delete only one nothing uses |
 | Money: transactions | `payments.view` | Filter by type, status or stuck refunds; re-check a pending payment with Flutterwave; retry a stuck refund (after checking Flutterwave) or settle it by hand |
 | Money: withdrawals | `payments.view` | Mark paid, reject, retry or refresh the Flutterwave transfer; a transfer that never confirmed needs an explicit "I checked Flutterwave" |
 | Money: wallets | `payments.view` | A professional's balance, manual adjustments (credit or debit, with reason) and recent withdrawals |
@@ -97,6 +100,6 @@ src/
   resources.tsx     the side menu
   components/       ActionButton (confirm + reason + audit), detail page helpers, CSV export,
                     permission-aware links, Header, formatting, table hook
-  pages/            dashboard, login, users, bookings, disputes, payments, subscriptions,
-                    reviews, notifications, staff
+  pages/            dashboard, login, users, bookings, disputes, professionals, postings,
+                    categories, payments, subscriptions, reviews, notifications, staff
 ```

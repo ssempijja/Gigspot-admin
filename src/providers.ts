@@ -127,6 +127,9 @@ export const RESOURCE_PERMISSIONS: Record<string, string> = {
   users: 'users.view',
   bookings: 'bookings.view',
   disputes: 'disputes.view',
+  professionals: 'professionals.view',
+  postings: 'postings.view',
+  categories: 'professionals.view',
   transactions: 'payments.view',
   withdrawals: 'payments.view',
   wallets: 'payments.view',
@@ -144,6 +147,7 @@ export const RESOURCE_PERMISSIONS: Record<string, string> = {
 
 /** The screens under each menu group. */
 export const MENU_GROUPS: Record<string, string[]> = {
+  marketplace: ['professionals', 'postings', 'categories'],
   money: ['transactions', 'withdrawals', 'reconciliation'],
   plans_group: ['subscriptions', 'plans'],
   content: ['reviews', 'review-reports'],
