@@ -132,9 +132,9 @@ export function BookingShow() {
             <ActionButton
               label="Mark as done"
               title="Mark this job as done?"
-              description="Use this when the professional can't. The client then has 24 hours to confirm."
+              description="Use this when the professional can't. The client then has 24 hours to confirm, after which the professional is paid."
               path={`${base}/complete`}
-              permission="bookings.manage"
+              permission="payouts.manage"
               onDone={refresh}
             />
           )}

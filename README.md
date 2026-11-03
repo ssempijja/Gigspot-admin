@@ -78,16 +78,56 @@ npm run build
 ```
 
 Set `VITE_API_URL` (see `.env.example`) to the API's public `/api` URL at build
-time. The output in `dist/` is static files: serve them from any static host
-with every unknown path falling back to `index.html`. Gigspot-api has no CORS
-set up yet, so for now serve the panel from the same origin as the API (proxy
-`/api` and `/media` to it) and leave `VITE_API_URL` at `/api`; a CORS allow-list
-for a separate panel domain is part of the hardening phase.
+time, e.g. `https://api.gigspot.example/api`. The output in `dist/` is static
+files: serve them from any static host (a Railway static service works) with
+every unknown path falling back to `index.html`.
+
+Host the panel on **its own domain**, not under the API's: people's uploaded
+files are served from the API's domain, and the panel's session should never
+share an origin with them. Then list the panel's address in the API's
+`ADMIN_PANEL_ORIGINS` (e.g. `https://admin.gigspot.example`); the API refuses
+browser calls to `/api/admin` from anywhere else.
+
+Recommended response headers from the static host:
+
+```
+Content-Security-Policy: default-src 'self'; connect-src 'self' https://api.gigspot.example; img-src 'self' data: https://api.gigspot.example; style-src 'self' 'unsafe-inline'; frame-ancestors 'none'
+X-Content-Type-Options: nosniff
+Referrer-Policy: no-referrer
+Strict-Transport-Security: max-age=31536000
+```
+
+Keep the address unlisted and add `noindex` (already in `index.html`).
 
 ## Checks
 
 ```bash
 npm run typecheck
+```
+
+### End-to-end tests
+
+The key admin flows run in a real browser against a real API:
+
+- first sign-in with an enrolment code and an authenticator code
+- marking a withdrawal paid from the dashboard queue, and refusing an
+  unconfirmed Flutterwave transfer until it was checked
+- holding and lifting a payout, resolving a review report, editing a posting,
+  adding and deleting a category, sending a group notification
+- finding every one of those in the audit log with its reason, signing out
+- a read-only viewer seeing records but no actions, masked account numbers and
+  no staff screens
+
+They need Gigspot-api next to this folder and its database running
+(`npm run db` there). They build the API into `Gigspot-api/.e2e-dist`, use a
+separate `gigspot_e2e` database that they empty and seed each run (the dev
+database is never touched), and start the API on port 8100 and the panel on
+5175. They use the Microsoft Edge installed on Windows; set
+`E2E_BROWSER_CHANNEL=chrome` for Chrome, or empty for Playwright's own
+Chromium (`npx playwright install chromium`).
+
+```bash
+npm run test:e2e
 ```
 
 ## Layout
@@ -102,4 +142,5 @@ src/
                     permission-aware links, Header, formatting, table hook
   pages/            dashboard, login, users, bookings, disputes, professionals, postings,
                     categories, payments, subscriptions, reviews, notifications, staff
+e2e/                end-to-end tests and the script that starts their API
 ```
