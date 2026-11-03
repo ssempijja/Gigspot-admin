@@ -10,7 +10,16 @@ import './styles.css';
 import { Header } from './components/Header';
 import { BookingList } from './pages/bookings/BookingList';
 import { BookingShow } from './pages/bookings/BookingShow';
+import { AppOverviewPage } from './pages/app/AppOverviewPage';
+import { CrashList } from './pages/app/CrashList';
+import { CrashShow } from './pages/app/CrashShow';
+import { DevicesPage } from './pages/app/DevicesPage';
+import { PerformancePage } from './pages/app/PerformancePage';
+import { SignInPage } from './pages/app/SignInPage';
+import { UsagePage } from './pages/app/UsagePage';
+import { UserTelemetryPage } from './pages/app/UserTelemetryPage';
 import { DashboardPage } from './pages/dashboard/DashboardPage';
+import { ReportPage } from './pages/report/ReportPage';
 import { DisputeList } from './pages/disputes/DisputeList';
 import { DisputeShow } from './pages/disputes/DisputeShow';
 import { CategoryList } from './pages/categories/CategoryList';
@@ -68,6 +77,7 @@ export function App() {
                 }
               >
                 <Route index element={<DashboardPage />} />
+                <Route path="/report" element={<ReportPage />} />
                 <Route path="/users">
                   <Route index element={<UserList />} />
                   <Route path="show/:id" element={<UserShow />} />
@@ -112,6 +122,16 @@ export function App() {
                 <Route path="/notifications/send" element={<SendPage />} />
                 <Route path="/notifications/sent" element={<SentList />} />
                 <Route path="/notifications/templates" element={<TemplateList />} />
+                <Route path="/app">
+                  <Route index element={<AppOverviewPage />} />
+                  <Route path="crashes" element={<CrashList />} />
+                  <Route path="crashes/show/:id" element={<CrashShow />} />
+                  <Route path="devices" element={<DevicesPage />} />
+                  <Route path="usage" element={<UsagePage />} />
+                  <Route path="sign-in" element={<SignInPage />} />
+                  <Route path="performance" element={<PerformancePage />} />
+                  <Route path="users/:id" element={<UserTelemetryPage />} />
+                </Route>
                 <Route path="/staff" element={<StaffList />} />
                 <Route path="/audit-log" element={<AuditLog />} />
                 <Route path="*" element={<ErrorComponent />} />

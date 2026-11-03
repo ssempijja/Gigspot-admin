@@ -16,3 +16,22 @@
     padding: 16px !important;
   }
 }
+
+/* Printing (the platform report): only the page content, on white. */
+@media print {
+  .ant-layout-sider,
+  .gs-header,
+  .ant-layout-has-sider > .ant-btn-icon-only,
+  .gs-no-print {
+    display: none !important;
+  }
+  .ant-layout,
+  .ant-layout-content {
+    background: #fff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .gs-report-section {
+    break-inside: avoid;
+  }
+}

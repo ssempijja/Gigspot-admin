@@ -84,6 +84,9 @@ export function UserShow() {
           <PermittedLink to={`/transactions?user=${user.id}`} permission="payments.view">
             Payments
           </PermittedLink>
+          <PermittedLink to={`/app/users/${user.id}`} permission="telemetry.view">
+            App activity
+          </PermittedLink>
           <AuditHistoryLink type="User" id={user.id} />
           <ActionButton
             label="Edit contact details"
@@ -111,6 +114,25 @@ export function UserShow() {
             />
           ) : (
             <ActionButton label="Reactivate" title={`Reactivate ${user.full_name}?`} path={`${base}/reactivate`} permission="users.suspend" onDone={refresh} />
+          )}
+          {!user.is_staff && !user.email.endsWith('@deleted.invalid') && (
+            <ActionButton
+              danger
+              label="Close account"
+              title={`Close ${user.full_name}'s account for good?`}
+              description={
+                <Alert
+                  type="warning"
+                  showIcon
+                  message="This cannot be undone"
+                  description="Their name, email, phone, ID number, photo, address, documents, portfolio, saved payment details and app data are wiped, and the account can never sign in again. Bookings, payments and reviews stay, as “Deleted user”. Use it for deletion requests; for anything else, suspend instead. It waits until nothing is in progress (bookings, disputes, withdrawals, money in their wallet)."
+                />
+              }
+              confirmText="Close the account"
+              path={`${base}/close`}
+              permission="users.close"
+              onDone={refresh}
+            />
           )}
           <ActionButton
             label="Change role"

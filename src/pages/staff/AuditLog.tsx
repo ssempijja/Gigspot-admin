@@ -34,6 +34,7 @@ const PAGES: Record<string, string> = {
   Review: '/reviews/show/',
   ProfessionalProfile: '/professionals/show/',
   JobRequest: '/postings/show/',
+  TelemetryCrashGroup: '/app/crashes/show/',
 };
 
 function entity(e: Entry) {

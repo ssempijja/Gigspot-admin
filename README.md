@@ -1,6 +1,6 @@
 # Gigspot Admin
 
-The staff web panel for Gigspot. It replaces the Django admin and talks only to
+The staff web panel for Gigspot. It replaces the Django admin and the mobile app's old admin screens and talks only to
 the `/api/admin/*` endpoints of [Gigspot-api](../Gigspot-api); it holds no data
 and no secrets of its own.
 
@@ -11,7 +11,7 @@ Built with React 19, [Refine](https://refine.dev) 5 and Ant Design 5, on Vite.
 | Screen | Needs | What staff can do |
 | --- | --- | --- |
 | Dashboard | `dashboard.view` | Users, bookings and money for 7/30/90 days; work queues (identity checks, documents, open disputes, held payouts, withdrawals and refunds to settle, review reports) |
-| Users | `users.view` | Search and filter; edit details, suspend or reactivate, change role, approve or reject identity checks, review documents |
+| Users | `users.view` | Search and filter; edit details, suspend or reactivate, change role, approve or reject identity checks, review documents; close an account for good (super admin: personal details wiped, bookings and payments kept) |
 | Bookings | `bookings.view` | Search and filter; cancel (optionally reopening the gig), mark done, hold, lift or release a payout; payments, proof of work, review, and messages (opening messages is audited) |
 | Disputes | `disputes.view` | Start review, resolve (refund the client, pay the professional, split, or no money moves), close without outcome |
 | Professionals | `professionals.view` | Filter by category, city, listing and verification; list, feature or mark unavailable; hide or show a service; approve or reject certificates; remove portfolio items; recompute rating and earnings |
@@ -25,6 +25,8 @@ Built with React 19, [Refine](https://refine.dev) 5 and Ant Design 5, on Vite.
 | Reviews | `reviews.view` | Hide or unhide reviews; settle reports (resolve, optionally hiding the review, or dismiss) |
 | Notifications | `notifications.view` | Send to one person or a group (counted first, then confirmed), start from a template, sending history, templates |
 | Staff | `staff.manage` | Give and take staff roles, reset an authenticator; enrolment codes are shown once |
+| App | `telemetry.view` | Crash-free sessions and people per version, crashes grouped by code location (people affected, phones, steps before, stack; mark fixed or ignored), phones and old versions, usage and features, sign-in times and failures, slow screens and API calls by network, one person's app activity (opening it is audited) |
+| Report | `dashboard.view` | The platform report (people, professionals, bookings, money, subscriptions) to print or save as PDF |
 | Audit log | `audit.view` | Every staff action with its reason and changes, filterable, linked from user, booking and dispute pages |
 
 Lists that have one carry an **Export CSV** button (`exports.download`) that

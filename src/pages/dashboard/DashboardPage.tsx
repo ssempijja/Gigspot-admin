@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 import { api } from '../../api';
 import { ugx } from '../../components/format';
 
-interface Overview {
+export interface Overview {
   range: { from: string; to: string; days: number };
   users: { total: number; by_role: Record<string, number>; new_in_range: number; suspended: number };
   professionals: { profiles: number; active: number; pending_verification: number };

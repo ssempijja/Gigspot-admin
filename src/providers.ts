@@ -124,6 +124,7 @@ export const authProvider: AuthProvider = {
 /** The permission each menu entry needs. */
 export const RESOURCE_PERMISSIONS: Record<string, string> = {
   dashboard: 'dashboard.view',
+  report: 'dashboard.view',
   users: 'users.view',
   bookings: 'bookings.view',
   disputes: 'disputes.view',
@@ -141,6 +142,14 @@ export const RESOURCE_PERMISSIONS: Record<string, string> = {
   templates: 'notifications.view',
   'send-notification': 'notifications.send',
   'sent-notifications': 'notifications.view',
+  'app-overview': 'telemetry.view',
+  'app-crashes': 'telemetry.view',
+  'telemetry-crashes': 'telemetry.view',
+  'app-devices': 'telemetry.view',
+  'app-usage': 'telemetry.view',
+  'app-sign-in': 'telemetry.view',
+  'app-performance': 'telemetry.view',
+  'app-user': 'telemetry.view',
   staff: 'staff.manage',
   'audit-log': 'audit.view',
 };
@@ -152,6 +161,7 @@ export const MENU_GROUPS: Record<string, string[]> = {
   plans_group: ['subscriptions', 'plans'],
   content: ['reviews', 'review-reports'],
   messaging: ['templates', 'send-notification', 'sent-notifications'],
+  app: ['app-overview', 'app-crashes', 'app-devices', 'app-usage', 'app-sign-in', 'app-performance'],
   admin: ['staff', 'audit-log'],
 };
 

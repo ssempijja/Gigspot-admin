@@ -3,7 +3,9 @@ import {
   CalendarOutlined,
   CrownOutlined,
   DashboardOutlined,
+  FileTextOutlined,
   MessageOutlined,
+  MobileOutlined,
   SafetyOutlined,
   ShopOutlined,
   StarOutlined,
@@ -20,6 +22,7 @@ import type { ResourceProps } from '@refinedev/core';
  */
 export const resources: ResourceProps[] = [
   { name: 'dashboard', list: '/', meta: { label: 'Dashboard', icon: <DashboardOutlined /> } },
+  { name: 'report', list: '/report', meta: { label: 'Report', icon: <FileTextOutlined /> } },
   { name: 'users', list: '/users', show: '/users/show/:id', meta: { label: 'Users', icon: <TeamOutlined /> } },
   { name: 'bookings', list: '/bookings', show: '/bookings/show/:id', meta: { label: 'Bookings', icon: <CalendarOutlined /> } },
   { name: 'disputes', list: '/disputes', show: '/disputes/show/:id', meta: { label: 'Disputes', icon: <WarningOutlined /> } },
@@ -48,6 +51,16 @@ export const resources: ResourceProps[] = [
   { name: 'send-notification', list: '/notifications/send', meta: { label: 'Send', parent: 'messaging' } },
   { name: 'sent-notifications', list: '/notifications/sent', meta: { label: 'Sent', parent: 'messaging' } },
   { name: 'templates', list: '/notifications/templates', meta: { label: 'Templates', parent: 'messaging' } },
+
+  { name: 'app', meta: { label: 'App', icon: <MobileOutlined /> } },
+  { name: 'app-overview', list: '/app', meta: { label: 'Overview', parent: 'app' } },
+  { name: 'app-crashes', list: '/app/crashes', show: '/app/crashes/show/:id', meta: { label: 'Crashes', parent: 'app' } },
+  { name: 'app-devices', list: '/app/devices', meta: { label: 'Phones', parent: 'app' } },
+  { name: 'app-usage', list: '/app/usage', meta: { label: 'Usage', parent: 'app' } },
+  { name: 'app-sign-in', list: '/app/sign-in', meta: { label: 'Sign-in', parent: 'app' } },
+  { name: 'app-performance', list: '/app/performance', meta: { label: 'Performance', parent: 'app' } },
+  // Reached from user pages and crashes, not the menu.
+  { name: 'app-user', show: '/app/users/:id', meta: { label: 'App activity', hide: true } },
 
   { name: 'admin', meta: { label: 'Staff', icon: <SafetyOutlined /> } },
   { name: 'staff', list: '/staff', meta: { label: 'Staff and roles', parent: 'admin' } },
